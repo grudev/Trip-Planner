@@ -8,8 +8,8 @@
 
 import Foundation
 
-public class ATStack<Element: Equatable> {
-    
+public class ATStack<StackElement: Equatable> {
+
     class Node<Element> {
         var item: Element
         var next: Node?
@@ -19,7 +19,7 @@ public class ATStack<Element: Equatable> {
         }
     }
     
-    private var head: Node<Element>?
+    private var head: Node<StackElement>?
     private var count: Int = 0
     
     public var isEmpty: Bool {
@@ -30,25 +30,25 @@ public class ATStack<Element: Equatable> {
         return count
     }
     
-    public func push(item: Element) {
+    public func push(item: StackElement) {
         let oldHead = head
         head = Node(withItem: item)
         head?.next = oldHead
         count += 1
     }
     
-    public func pop() -> Element? {
+    public func pop() -> StackElement? {
         let item = head?.item
         head = head?.next
         count -= 1
         return item
     }
     
-    public func peek() -> Element? {
+    public func peek() -> StackElement? {
         return head?.item
     }
     
-    public func contains(_ element: Element) -> Bool {
+    public func contains(_ element: StackElement) -> Bool {
         var current = head
         while (current != nil) {
             if current?.item == element {
@@ -59,8 +59,8 @@ public class ATStack<Element: Equatable> {
         return false
     }
     
-    public func allElements() -> [Element] {
-        var result: [Element] = []
+    public func allElements() -> [StackElement] {
+        var result: [StackElement] = []
         
         var current = head
         while current != nil {

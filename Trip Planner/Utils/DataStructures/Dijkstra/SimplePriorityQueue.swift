@@ -8,8 +8,8 @@
 
 import Foundation
 
-public class SimplePriorityQueue<Element: Equatable> {
-    
+public class SimplePriorityQueue<QueueElement: Equatable> {
+
     private class QueueItem<Element: Equatable>: Comparable {
         
         let value: Element
@@ -29,34 +29,34 @@ public class SimplePriorityQueue<Element: Equatable> {
         }
     }
     
-    private var items: [QueueItem<Element>] = []
-    
+    private var items: [QueueItem<QueueElement>] = []
+
     public var isEmpty: Bool {
         return items.isEmpty
     }
     
-    public func contains(_ item: Element) -> Bool {
+    public func contains(_ item: QueueElement) -> Bool {
         return items.contains { $0.value == item }
     }
     
-    public func insert(_ item: Element, priority: Double) {
+    public func insert(_ item: QueueElement, priority: Double) {
         if contains(item) {
             update(item, priority: priority)
         } else {
-            let newItem = QueueItem<Element>(item, priority: priority)
+            let newItem = QueueItem<QueueElement>(item, priority: priority)
             items.append(newItem)
             sortItems()
         }
     }
     
-    public func update(_ item: Element, priority: Double) {
+    public func update(_ item: QueueElement, priority: Double) {
         if let existingItem = items.filter({ $0.value == item }).first {
             existingItem.priority = priority
             sortItems()
         }
     }
     
-    public func deleteMin() -> Element? {
+    public func deleteMin() -> QueueElement? {
         guard isEmpty == false else {
             return nil
         }
